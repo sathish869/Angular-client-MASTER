@@ -1,0 +1,13 @@
+<progress-spinner *ngIf="usersLoading;else elseBlock"></progress-spinner>
+<ng-template #elseBlock>
+    <mat-selection-list #userSelector [multiple]="false">
+        <mat-list-option *ngFor="let user of loadedUsers" [value]="user.login">
+            <p>{{user.login}}</p> <br>
+        </mat-list-option>
+    </mat-selection-list>
+
+    <p>
+        Option selected: {{userSelector.selectedOptions.hasValue() ? userSelector.selectedOptions.selected[0].value :
+        'None'}}
+    </p>
+</ng-template>
