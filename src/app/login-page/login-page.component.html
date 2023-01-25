@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row">
+        <div class="Get-in-button">
+            <button mat-stroked-button color="primary" (click)="onGetIn()">Get In <mat-icon
+                    matSuffix>skip_next</mat-icon></button>
+        </div>
+    </div>
+</div>
+<div class="allignment-provider">
+    <div class="box-model">
+        <p>
+            <mat-form-field appearance="fill">
+                <mat-label>Enter the token</mat-label>
+                <input #inputToken matInput placeholder="Placeholder">
+                <mat-icon matSuffix>vpn_key</mat-icon>
+                <mat-hint>GIT hub token</mat-hint>
+            </mat-form-field><br><br>
+        </p>
+        <button mat-raised-button color="primary" (click)="onLogin(inputToken.value)">Login</button>
+    </div>
+</div>

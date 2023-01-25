@@ -1,0 +1,21 @@
+
+.allignment-provider {
+    margin-left: 35%;
+    margin-top: 8%;
+    
+}
+.Get-in-button{
+    margin-top: 1px;
+    margin-right: 2px;
+    position:absolute;
+    top:10%;
+    right:10%;
+}
+
+.box-model {
+    background-color: rgb(243, 243, 243);
+    width: 300px;
+    border: 2px solid rgb(6, 6, 6);
+    padding: 50px;
+    margin: 20px;
+}
