@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { userModel } from '../user.model';
+import {  usersDetails } from '../user.model';
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
@@ -11,7 +11,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class UserComponent {
   value: any;
   usersLoading: boolean = false;
-  loadedUsers: userModel[] = [];
+  loadedUsers: usersDetails[] = [];
 
   constructor(private http: HttpClient,
     private matSnackBar:MatSnackBar) {
@@ -20,7 +20,7 @@ export class UserComponent {
   onLoadUsers() {
     this.usersLoading = true;
     this.http
-      .get<userModel[]>('https://api.github.com/users')
+      .get<usersDetails[]>('https://api.github.com/users')
       .subscribe((responseData) => {
         this.loadedUsers = responseData.length ? responseData : [];
         console.log(responseData);

@@ -2,6 +2,7 @@ import { HttpClient, HttpBackend } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject, catchError, pipe } from 'rxjs';
 import { errorHandler } from './errorHandlingService';
+import {  userDetails } from './user.model';
 
 @Injectable({ providedIn: 'root' })
 export class tokenShareService {
@@ -14,7 +15,7 @@ export class tokenShareService {
 
   onValidateToken(token: string) {
     return this.http
-      .get('https://api.github.com/user', {
+      .get<userDetails>('https://api.github.com/user', {
         headers: { Authorization: 'Bearer ' + token },
       })
       .pipe(catchError(errorHandler));
