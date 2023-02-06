@@ -1,35 +1,52 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {  usersDetails } from '../user.model';
-import {MatSnackBar} from "@angular/material/snack-bar";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { loginDetailService } from '../login-page/login-detail.service';
+import { userDetails, usersDetails } from '../user.model';
+import { gettingUserService } from './gettingUser.service';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css'],
 })
-export class UserComponent {
-  value: any;
-  usersLoading: boolean = false;
-  loadedUsers: usersDetails[] = [];
+export class UserComponent implements OnInit,OnDestroy {
 
-  constructor(private http: HttpClient,
-    private matSnackBar:MatSnackBar) {
-    this.onLoadUsers();
+  usersLoading: boolean;
+  loadedUsers: usersDetails[];
+  currentUser:userDetails;
+  currentUserSub=new Subscription;
+  usersLoadingSub=new Subscription;
+  userEmitterSub=new Subscription;
+  
+
+  constructor(private gettingUserService: gettingUserService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private matSnackBar:MatSnackBar,
+    private loginDetailService:loginDetailService) {}
+
+  ngOnDestroy(): void {
+    this.usersLoadingSub.unsubscribe();
+    this.userEmitterSub.unsubscribe();
   }
-  onLoadUsers() {
-    this.usersLoading = true;
-    this.http
-      .get<usersDetails[]>('https://api.github.com/users')
-      .subscribe((responseData) => {
-        this.loadedUsers = responseData.length ? responseData : [];
-        console.log(responseData);
-        this.usersLoading = false;
-      },error=>{
-        this.onErrorHandle(error);
-      });
+
+  ngOnInit(): void {
+    this.usersLoadingSub=this.gettingUserService.usersLoading.subscribe((value) => {
+      this.usersLoading = value;
+    });
+    this.userEmitterSub=this.gettingUserService.userEmitter.subscribe((value) => {
+      this.loadedUsers = value;
+    });
+    this.currentUserSub=this.loginDetailService.currentUser.subscribe((value) => {
+      this.currentUser=value;
+    });
   }
-  onErrorHandle(error:string){
-      this.matSnackBar.open(error);
+
+  onLoadUserDetail(userName:string){
+    this.matSnackBar.dismiss();
+    console.log("onLoadUserDetail",userName)
+    this.router.navigate([userName], { relativeTo: this.route }); 
   }
 }

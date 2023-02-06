@@ -18,6 +18,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AppRoutingModule } from './routing/app-routing.module';
 import { HeaderComponent } from './login-page/header/header.component';
+import {MatCardModule} from '@angular/material/card';
+import { UserDetailComponent } from './user/user-detail/user-detail.component'
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { HeaderComponent } from './login-page/header/header.component';
     UserComponent,
     LoginPageComponent,
     HeaderComponent,
+    UserDetailComponent,
   ],
   providers: [
     {
@@ -42,6 +45,7 @@ import { HeaderComponent } from './login-page/header/header.component';
     HttpClientModule,
     MatListModule,
     MatIconModule,
+    MatCardModule,
     MatFormFieldModule,
     AppRoutingModule,
     MatInputModule,

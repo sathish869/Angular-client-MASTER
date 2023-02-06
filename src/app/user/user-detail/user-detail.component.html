@@ -1,0 +1,35 @@
+<mat-spinner class="spinner1" *ngIf="usersLoading;else elseBlock"></mat-spinner>
+<ng-template #elseBlock>
+    <mat-card *ngIf="clickedUser">
+        <div class="a-box">
+            <div class="img-container">
+                <div class="img-inner">
+                    <div class="inner-skew">
+                        <img [src]="clickedUser.avatar_url">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="loadUsers" (click)="onReturnToUser()">back to users</button>
+        <div class="text-container">
+            <h3><mat-card-title>{{clickedUser.login}}</mat-card-title></h3>
+            <div><mat-card-content>
+                    <form>
+                        <tr>
+                            <td>No.of.Followers : </td>
+                            <td>{{clickedUser.followers ?clickedUser.followers:0}}</td>
+                        </tr>
+                        <tr>
+                            <td>No.of.Repos: </td>
+                            <td>{{clickedUser.public_repos?clickedUser.public_repos:0}}</td>
+                        </tr>
+                        <tr>
+                            <td>Location: </td>
+                            <td>{{clickedUser.location?clickedUser.location:""}}</td>
+                        </tr>
+                    </form>
+                </mat-card-content>
+            </div>
+        </div>
+    </mat-card>
+</ng-template>

@@ -13,6 +13,7 @@ const appsRoute: Routes = [
     loadChildren: () =>
       import('./loginRoute.module').then((m) => m.loginRouteModule),
   },
+  
 ];
 
 @NgModule({

@@ -13,12 +13,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   loggedinSubscription = new Subscription();
   isInLoginPageSub = new Subscription();
 
-  isInLoginPage: boolean; 
+  isInLoginPage: boolean;
   isLoggedIn: boolean;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private logindetailService:loginDetailService
+    private logindetailService: loginDetailService
   ) {}
 
   ngOnInit(): void {
@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       }
     );
     this.isInLoginPageSub = this.logindetailService.isinLoginPage.subscribe(
-      value => {
+      (value) => {
         this.isInLoginPage = !!value;
       }
     );
@@ -40,6 +40,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onLogout() {
     this.isLoggedIn = false;
+    this.logindetailService.currentUser.next(null);
     this.router.navigate(['/login'], { relativeTo: this.route });
   }
 

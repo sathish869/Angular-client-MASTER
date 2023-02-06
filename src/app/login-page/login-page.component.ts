@@ -10,15 +10,13 @@ import { loginDetailService } from './login-detail.service';
   styleUrls: ['./login-page.component.css'],
 })
 export class LoginPageComponent implements OnInit {
- 
-
   loginError: string = '';
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private tokenShareService: tokenShareService,
     private matSnackBar: MatSnackBar,
-    private logindetailService:loginDetailService
+    private logindetailService: loginDetailService
   ) {}
   ngOnInit(): void {
     this.logindetailService.isLoggedin.next(false);
@@ -30,7 +28,7 @@ export class LoginPageComponent implements OnInit {
     this.tokenShareService.onValidateToken(token).subscribe(
       (userData) => {
         console.log(userData);
-        this.logindetailService.currentUser.next(userData)
+        this.logindetailService.currentUser.next(userData);
         this.tokenShareService.onSetToken(token);
         this.router.navigate(['/users'], { relativeTo: this.route });
         this.logindetailService.isinLoginPage.next(false);
