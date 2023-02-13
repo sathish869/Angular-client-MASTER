@@ -1,6 +1,6 @@
 import { Component, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import { usersDetails } from '../user.model';
 
 @Component({
   selector: 'app-list-of-user',
@@ -8,25 +8,20 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./list-of-user.component.css'],
 })
 export class ListOfUserComponent {
-  value:any;
-  usersLoading:boolean=false;
+  value: string = '';
+  usersLoading: boolean = false;
   loadedUsers: any = [];
 
-  constructor(private http: HttpClient,
-              ) {
+  constructor(private http: HttpClient) {
     this.onLoadUsers();
-    
   }
   onLoadUsers() {
-   this.usersLoading=true;
+    this.usersLoading = true;
     this.http
-      .get('https://api.github.com/users')
+      .get<usersDetails[]>('https://api.github.com/users')
       .subscribe((responseData) => {
-        setTimeout(() => {
-          this.loadedUsers = responseData;
-          this.usersLoading=false;
-        }, 2000);
-        
+        this.loadedUsers = responseData;
+        this.usersLoading = false;
         console.log('users loaded');
       });
   }
