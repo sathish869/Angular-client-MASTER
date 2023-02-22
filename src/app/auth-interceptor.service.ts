@@ -4,16 +4,14 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { tokenShareService } from './token-share.service';
+import { Store } from '@ngrx/store';
+import { universalStoreOfState } from './appStore/app-store.module';
 
 @Injectable({ providedIn: 'root' })
 export class AuthInterceptorService implements HttpInterceptor {
   token: string = '';
-  constructor(private tokenSharingService: tokenShareService) {
-    this.tokenSharingService.tokenEmitter.subscribe((token) => {
-      this.token = token;
-    });
-  }
+  constructor(private store: Store<universalStoreOfState>) {}
+ 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     if (this.token !== '') {
       const modifedReq = req.clone({

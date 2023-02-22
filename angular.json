@@ -5,7 +5,9 @@
   "projects": {
     "assign-3": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -99,5 +101,11 @@
         }
       }
     }
+  },
+  "cli": {
+    "defaultCollection": "@ngrx/schematics",
+    "schematicCollections": [
+      "@ngrx/schematics"
+    ]
   }
 }

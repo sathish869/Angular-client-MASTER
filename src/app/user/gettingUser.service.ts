@@ -1,33 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { Store } from '@ngrx/store';
+import {  Observable, tap } from 'rxjs';
+import { universalStoreOfState } from '../appStore/app-store.module';
 import { userDetails, usersDetails } from '../user.model';
 
 @Injectable({ providedIn: 'root' })
 export class gettingUserService {
-  public userClicked = new Subject<userDetails>();
-  public usersLoading = new BehaviorSubject<boolean>(false);
-  public userEmitter = new BehaviorSubject<usersDetails[]>(null);
-  public currentUserEmitter=new BehaviorSubject<userDetails[]>(null);
 
-  constructor(private http: HttpClient, private matSnackBar: MatSnackBar) {
-    this.onLoadUsers();
-  }
+  constructor(private http: HttpClient){}
 
-  onLoadUsers() {
-    this.usersLoading.next(true);
-    this.http.get<usersDetails[]>('https://api.github.com/users').subscribe(
-      (responseData) => {
-        this.userEmitter.next(responseData);
-        this.usersLoading.next(false);
-      },
-      (error) => {
-        this.onErrorHandle(error);
-      }
-    );
+  onLoadUsers():Observable<usersDetails[]> {
+    return this.http.get<usersDetails[]>('https://api.github.com/users')
   }
-  onErrorHandle(error: string) {
-    this.matSnackBar.open(error);
+  
+  onLoadUserDetail(userName:string):Observable<userDetails>{
+     return this.http.get<userDetails>('https://api.github.com/users/'+userName)
   }
 }

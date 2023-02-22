@@ -18,8 +18,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AppRoutingModule } from './routing/app-routing.module';
 import { HeaderComponent } from './login-page/header/header.component';
-import {MatCardModule} from '@angular/material/card';
-import { UserDetailComponent } from './user/user-detail/user-detail.component'
+import { MatCardModule} from '@angular/material/card';
+import { UserDetailComponent } from './user/user-detail/user-detail.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { storeOfAppModule } from './appStore/app-store.module';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -53,7 +59,12 @@ import { UserDetailComponent } from './user/user-detail/user-detail.component'
     MatSnackBarModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatToolbarModule
+    MatToolbarModule,
+    StoreDevtoolsModule.instrument({ logOnly: environment.production }),
+    StoreRouterConnectingModule,
+    EffectsModule.forRoot(storeOfAppModule.allEffects),
+    StoreModule.forRoot(storeOfAppModule.allReducers),
+    
   ],
 })
 export class AppModule {}

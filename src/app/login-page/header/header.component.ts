@@ -1,8 +1,9 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { loginDetailService } from '../login-detail.service';
-import { LoginPageComponent } from '../login-page.component';
+import { universalStoreOfState } from 'src/app/appStore/app-store.module';
+import { authActions } from '../auth_store/auth.actions';
 
 @Component({
   selector: 'app-header',
@@ -10,37 +11,41 @@ import { LoginPageComponent } from '../login-page.component';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  loggedinSubscription = new Subscription();
-  isInLoginPageSub = new Subscription();
-
+  urlSub = new Subscription();
+  storeSub = new Subscription();
   isInLoginPage: boolean;
-  isLoggedIn: boolean;
+  isLoggedIn: boolean = false;
   constructor(
+    private store: Store<universalStoreOfState>,
     private router: Router,
-    private route: ActivatedRoute,
-    private logindetailService: loginDetailService
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.loggedinSubscription = this.logindetailService.isLoggedin.subscribe(
-      (value) => {
-        this.isLoggedIn = !!value;
+    this.urlSub = this.router.events.subscribe((Allevents) => {
+      if (Allevents instanceof NavigationStart) {
+        if (Allevents['url'] === '/login') {
+          this.isInLoginPage = true;
+        } else {
+          this.isInLoginPage = false;
+        }
       }
-    );
-    this.isInLoginPageSub = this.logindetailService.isinLoginPage.subscribe(
-      (value) => {
-        this.isInLoginPage = !!value;
+    });
+    this.storeSub = this.store.select('authState').subscribe((authState) => {
+      if (authState.userData === null) {
+        this.isLoggedIn = false;
+      } else {
+        this.isLoggedIn = true;
       }
-    );
+    });
   }
   ngOnDestroy() {
-    this.loggedinSubscription.unsubscribe();
-    this.isInLoginPageSub.unsubscribe();
+    this.urlSub.unsubscribe();
+    this.storeSub.unsubscribe();
   }
 
   onLogout() {
-    this.isLoggedIn = false;
-    this.logindetailService.currentUser.next(null);
+    this.store.dispatch(authActions.logout());
     this.router.navigate(['/login'], { relativeTo: this.route });
   }
 
