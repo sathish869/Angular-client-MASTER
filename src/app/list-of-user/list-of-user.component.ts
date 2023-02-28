@@ -1,27 +1,29 @@
-import { Component, Output } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { usersDetails } from '../user.model';
+import { UsersDetails } from '../user.model';
 
 @Component({
   selector: 'app-list-of-user',
   templateUrl: './list-of-user.component.html',
   styleUrls: ['./list-of-user.component.css'],
 })
-export class ListOfUserComponent {
+export class ListOfUserComponent implements OnInit {
   value: string = '';
   usersLoading: boolean = false;
-  loadedUsers: any = [];
+  loadedUsers: UsersDetails[] = [];
 
   constructor(private http: HttpClient) {
+  }
+  ngOnInit(): void {
     this.onLoadUsers();
   }
   onLoadUsers() {
     this.usersLoading = true;
     this.http
-      .get<usersDetails[]>('https://api.github.com/users')
+      .get<UsersDetails[]>('https://api.github.com/users')
       .subscribe((responseData) => {
         this.loadedUsers = responseData;
-        this.usersLoading = false;
+        this.usersLoading = false
         console.log('users loaded');
       });
   }
