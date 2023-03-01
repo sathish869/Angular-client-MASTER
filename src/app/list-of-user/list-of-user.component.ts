@@ -8,7 +8,6 @@ import { UsersDetails } from '../user.model';
   styleUrls: ['./list-of-user.component.css'],
 })
 export class ListOfUserComponent implements OnInit {
-  value: string = '';
   usersLoading: boolean = false;
   loadedUsers: UsersDetails[] = [];
 

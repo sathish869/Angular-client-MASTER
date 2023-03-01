@@ -1,5 +1,5 @@
-<div>
-    <mat-spinner class="spinner" *ngIf="usersLoading;else elseBlock"></mat-spinner>
+<div class="spinner" *ngIf="usersLoading;else elseBlock">
+    <mat-spinner></mat-spinner>
 </div>
 <div>
     <ng-template #elseBlock>
