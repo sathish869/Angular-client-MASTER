@@ -12,8 +12,7 @@ export class ListOfUserComponent implements OnInit {
   usersLoading: boolean = false;
   loadedUsers: UsersDetails[] = [];
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
   ngOnInit(): void {
     this.onLoadUsers();
   }
@@ -23,7 +22,7 @@ export class ListOfUserComponent implements OnInit {
       .get<UsersDetails[]>('https://api.github.com/users')
       .subscribe((responseData) => {
         this.loadedUsers = responseData;
-        this.usersLoading = false
+        this.usersLoading = false;
         console.log('users loaded');
       });
   }
