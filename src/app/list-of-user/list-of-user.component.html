@@ -1,0 +1,17 @@
+<div class="spinner" *ngIf="usersLoading;else elseBlock">
+    <mat-spinner></mat-spinner>
+</div>
+<div>
+    <ng-template #elseBlock>
+        <mat-selection-list #userSelector [multiple]="false">
+            <mat-list-option *ngFor="let user of loadedUsers" [value]="user.login">
+                <p>{{user.login}}</p>
+            </mat-list-option>
+        </mat-selection-list>
+        <p>
+            Option selected: {{userSelector.selectedOptions.hasValue() ? userSelector.selectedOptions.selected[0].value
+            :
+            'None'}}
+        </p>
+    </ng-template>
+</div>
