@@ -1,8 +1,10 @@
-<mat-spinner class="spinner1" *ngIf="usersLoading;else elseBlock"></mat-spinner>
+<div class="spinner" *ngIf="usersLoading;else elseBlock">
+    <mat-spinner></mat-spinner>
+</div>
 <ng-template #elseBlock>
     <mat-selection-list #userSelector [multiple]="false">
         <mat-list-option *ngFor="let user of loadedUsers" [value]="user.login">
-            <p>{{user.login}}</p> <br>
+            <p>{{user.login}}</p>
         </mat-list-option>
     </mat-selection-list>
 

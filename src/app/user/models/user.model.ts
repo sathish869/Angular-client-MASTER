@@ -1,4 +1,4 @@
-export interface usersDetails {
+export interface UsersDetails {
   login: string;
   id: number;
   node_id: string;
@@ -19,7 +19,7 @@ export interface usersDetails {
   
 }
 
-export interface userDetails {
+export interface UserDetails {
   login: string;
   id: number;
   node_id: string;
