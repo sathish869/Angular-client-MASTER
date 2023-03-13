@@ -94,3 +94,9 @@ button:hover {
 button:focus {
     outline: none;
 }
+/* .repo-container{
+    margin-top: 0;
+} */
+.repoTable{
+    width: 100%;
+}

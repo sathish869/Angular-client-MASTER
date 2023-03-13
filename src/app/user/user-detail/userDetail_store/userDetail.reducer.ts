@@ -1,9 +1,10 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { userDetails } from 'src/app/user.model';
+import { RepoDetail } from 'src/app/model/repoDetail.model';
+import { UserDetails } from 'src/app/model/user.model';
 import { userDetailActions } from './userDetail.actions';
 
 export interface userDetailState {
-  clickedUser: userDetails | null;
+  clickedUser: [UserDetails, RepoDetail[]] | null;
   loadingFlag: boolean;
   error: string | null;
 }

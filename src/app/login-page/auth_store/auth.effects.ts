@@ -5,11 +5,10 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { mergeMap, map, catchError, of, Observable } from 'rxjs';
+import { mergeMap, map, catchError, of } from 'rxjs';
 import { errorMessageHandling } from 'src/app/errorHandlingService';
 import { tokenShareService } from 'src/app/token-share.service';
-import { userDetails } from 'src/app/user.model';
-import { gettingUserService } from 'src/app/user/gettingUser.service';
+import { UserDetails } from 'src/app/model/user.model';
 import { authActions } from './auth.actions';
 
 @Injectable()
@@ -29,7 +28,7 @@ export class AuthEffects {
       mergeMap((loginData) => {
         return this.tokenShareService.onValidateToken(loginData.userToken).pipe(
           map(
-            (userData: userDetails) =>
+            (userData: UserDetails) =>
               authActions.retriveCurrentUser({ currentUser: userData }),
           ),
           catchError((errorData: HttpErrorResponse) =>

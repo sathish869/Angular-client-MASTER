@@ -32,4 +32,44 @@
             </div>
         </div>
     </mat-card>
+     <div class="repoContainer" *ngIf="dataSource">
+         <table class="repoTable"[dataSource]="dataSource" mat-table matSort>
+          
+            <div matColumnDef="repoName">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header> Repo Name</th>
+                <td *matCellDef="let value" mat-cell> {{value.repoName}} </td>
+            </div>
+
+            <div matColumnDef="repoDescription">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header> Description</th>
+                <td *matCellDef="let value" mat-cell> {{value.repoDescription}} </td>
+            </div>
+
+            <div matColumnDef="stars_count">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header> StarsCount</th>
+                <td *matCellDef="let value" mat-cell> {{value.stars_count}} </td>
+            </div>
+
+            <div matColumnDef="watchers_count">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header> WatcherCount</th>
+                <td *matCellDef="let value" mat-cell> {{value.watchers_count}} </td>
+            </div>
+
+            <div matColumnDef="created_date">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header> CreatedDate</th>
+                <td *matCellDef="let value" mat-cell> {{value.created_date | date: 'shortDate'}} </td>
+            </div>
+
+            <div matColumnDef="updated_date">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header> UpdatedDate</th>
+                <td *matCellDef="let value" mat-cell> {{value.updated_date | date: 'shortDate'}} </td>
+            </div>
+
+            <tr *matHeaderRowDef="columnName" mat-header-row></tr>
+            <tr *matRowDef="let row; columns: columnName;" mat-row></tr>
+        </table>
+        <mat-paginator [pageSize]="2" [pageSizeOptions]="[3,4,5]" aria-label="Select page"
+            [disabled]="filteredUserRepo.length<1" aria-label="Select page"
+            showFirstLastButtons></mat-paginator>
+    </div>
 </ng-template>

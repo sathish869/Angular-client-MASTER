@@ -1,6 +1,6 @@
 import { HttpClient, HttpBackend } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { userDetails } from './user.model';
+import { UserDetails } from './model/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class tokenShareService {
@@ -9,7 +9,7 @@ export class tokenShareService {
   }
   
   onValidateToken(token: string) {
-    return this.http.get<userDetails>('https://api.github.com/user', {
+    return this.http.get<UserDetails>('https://api.github.com/user', {
       headers: { Authorization: 'Bearer ' + token },
     });
   }

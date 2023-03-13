@@ -1,9 +1,9 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { usersDetails } from 'src/app/user.model';
+import { UsersDetails } from 'src/app/model/user.model';
 import { userListAction } from './userList.actions';
 
 export interface userListState {
-  usersData: usersDetails[] | null;
+  usersData: UsersDetails[] | null;
   error: string | null;
   loadingFlag: boolean;
 }

@@ -1,10 +1,9 @@
-import { state } from '@angular/animations';
 import { Action, createReducer, on } from '@ngrx/store';
-import { userDetails } from 'src/app/user.model';
+import { UserDetails } from 'src/app/model/user.model';
 import { authActions } from './auth.actions';
 
 export interface authState {
-  userData: userDetails | null,
+  userData: UserDetails | null,
   userToken:string | null,
   loginError: string |null,
 }

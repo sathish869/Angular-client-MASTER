@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap, of } from 'rxjs';
 import { errorMessageHandling } from 'src/app/errorHandlingService';
-import { usersDetails } from 'src/app/user.model';
+import { UsersDetails } from 'src/app/model/user.model';
 import { gettingUserService } from '../gettingUser.service';
 import { userListAction } from './userList.actions';
 
@@ -14,7 +14,7 @@ export class UserEffects {
       ofType(userListAction.retrieveUsersData),
       mergeMap(() => {
         return this.gettingUserService.onLoadUsers().pipe(
-          map((userList: usersDetails[]) =>
+          map((userList: UsersDetails[]) =>
             userListAction.retrievedUsers({ userList: userList })
           ),
           catchError((errorData: HttpErrorResponse) =>

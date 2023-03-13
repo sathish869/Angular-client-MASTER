@@ -3,11 +3,9 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "assign-3": {
+    "Chapter-5": {
       "projectType": "application",
-      "schematics": {
-        
-      },
+      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -15,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/assign-3",
+            "outputPath": "dist/Chapter-5",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -67,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "assign-3:build:production"
+              "browserTarget": "Chapter-5:build:production"
             },
             "development": {
-              "browserTarget": "assign-3:build:development"
+              "browserTarget": "Chapter-5:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "assign-3:build"
+            "browserTarget": "Chapter-5:build"
           }
         },
         "test": {
@@ -105,6 +103,10 @@
   "cli": {
     "defaultCollection": "@ngrx/schematics",
     "schematicCollections": [
+      "@ngrx/schematics",
+      "@ngrx/schematics",
+      "@ngrx/schematics",
+      "@ngrx/schematics",
       "@ngrx/schematics"
     ]
   }

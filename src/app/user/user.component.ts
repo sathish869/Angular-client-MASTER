@@ -4,8 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { universalStoreOfState } from '../appStore/app-store.module';
-import { userDetails, usersDetails } from '../user.model';
-import { userDetailActions } from './user-detail/userDetail_store/userDetail.actions';
+import { UserDetails, UsersDetails } from '../model/user.model';
 import { userListAction } from './userList_store/userList.actions';
 
 @Component({
@@ -15,8 +14,8 @@ import { userListAction } from './userList_store/userList.actions';
 })
 export class UserComponent implements OnInit, OnDestroy {
   usersLoadingFlag: boolean;
-  loadedUsers: usersDetails[]=null;
-  currentUser: userDetails;
+  loadedUsers: UsersDetails[] = null;
+  currentUser: UserDetails;
   usersSub = new Subscription();
 
   constructor(
@@ -35,9 +34,12 @@ export class UserComponent implements OnInit, OnDestroy {
     if (this.loadedUsers === null) {
       this.store.dispatch(userListAction.retrieveUsersData());
     }
-    const currentUserSub=this.store.select('authState').subscribe((authState)=>{
-        this.currentUser=authState.userData?authState.userData:null;
-    })
+    const currentUserSub = this.store
+      .select('authState')
+      .subscribe((authState) => {
+        this.currentUser = authState.userData ? authState.userData : null;
+      });
+      
     const usersSub = this.store.select('usersState').subscribe((usersState) => {
       this.loadedUsers = usersState.usersData ? usersState.usersData : [];
       this.usersLoadingFlag = usersState.loadingFlag;

@@ -12,13 +12,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
-import { MatTooltipModule } from '@angular/material/tooltip'
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AppRoutingModule } from './routing/app-routing.module';
 import { HeaderComponent } from './login-page/header/header.component';
-import { MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { UserDetailComponent } from './user/user-detail/user-detail.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -26,6 +26,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { storeOfAppModule } from './appStore/app-store.module';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { environment } from 'src/environments/environment';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -60,11 +63,13 @@ import { environment } from 'src/environments/environment';
     ReactiveFormsModule,
     MatButtonModule,
     MatToolbarModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
     StoreDevtoolsModule.instrument({ logOnly: environment.production }),
-    StoreRouterConnectingModule,
+    StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot(storeOfAppModule.allEffects),
     StoreModule.forRoot(storeOfAppModule.allReducers),
-    
   ],
 })
 export class AppModule {}
