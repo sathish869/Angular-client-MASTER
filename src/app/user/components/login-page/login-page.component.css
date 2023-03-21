@@ -1,0 +1,14 @@
+.box-model-container {
+    display: flex;
+    flex: 1 1 100%;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+}
+
+.box-model {
+    background-color: rgb(243, 243, 243);
+    border: 2px solid rgb(6, 6, 6);
+    padding: 25px;
+    margin: 20px;
+}

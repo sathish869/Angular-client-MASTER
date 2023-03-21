@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "assign-3": {
+    "assign-4": {
       "projectType": "application",
       "schematics": {
         
@@ -15,7 +15,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/assign-3",
+            "outputPath": "dist/assign-4",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -67,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "assign-3:build:production"
+              "browserTarget": "assign-4:build:production"
             },
             "development": {
-              "browserTarget": "assign-3:build:development"
+              "browserTarget": "assign-4:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,7 +78,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "assign-3:build"
+            "browserTarget": "assign-4:build"
           }
         },
         "test": {
