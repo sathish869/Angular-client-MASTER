@@ -1,22 +1,16 @@
-<div>
-    <div class="get-in-container">
-        <button mat-stroked-button color="primary" (click)="onGetIn()">Get In <mat-icon
-                matSuffix>skip_next</mat-icon></button>
-    
-    </div>
-    <div class="box-model-container">
-        <div class="box-model">
-            <div>
-                <mat-form-field appearance="fill">
-                    <mat-label>Enter the token</mat-label>
-                    <input type=password #inputToken matInput>
-                    <mat-icon matSuffix>{{inputToken.value ? 'key' : 'key_off'}}</mat-icon>
-                    <mat-hint>GIT hub token</mat-hint>
-                </mat-form-field>
-            </div>
-            <button mat-raised-button color="primary" (click)="onLogin(inputToken.value)"
-                [disabled]="!inputToken.value">Login <mat-icon>
-                    login</mat-icon></button>
+<div class="box-model-container">
+    <div class="box-model">
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Enter the token</mat-label>
+                <input type="password" #inputToken matInput>
+                <mat-icon *ngIf="inputToken.value" matSuffix>key</mat-icon>
+                <mat-icon #elseBlock *ngIf="!inputToken.value" matSuffix>key_off</mat-icon>
+                <mat-hint>GIT hub token</mat-hint>
+            </mat-form-field>
         </div>
+        <button mat-raised-button color="primary" (click)="onLogin(inputToken.value)"
+            [disabled]="!inputToken.value">Login <mat-icon>
+                login</mat-icon></button>
     </div>
 </div>
