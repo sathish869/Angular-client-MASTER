@@ -14,8 +14,8 @@ import { userListAction } from '../../stores/user-list-store/userList.actions';
 })
 export class UserComponent implements OnInit, OnDestroy {
   usersLoading: boolean = false;
-  loadedUsers: UsersDetails[] ;
-  currentUser: UserDetails;
+  loadedUsers: UsersDetails[] =[];
+  currentUser: UserDetails | null =null;
   userComponentSub = new Subscription();
 
   constructor(
@@ -29,7 +29,7 @@ export class UserComponent implements OnInit, OnDestroy {
     this.userComponentSub.unsubscribe();
   }
   ngOnInit(): void {
-    if (this.loadedUsers === null) {
+    if (this.loadedUsers.length === 0) {
       this.store.dispatch(userListAction.retrieveUsersData());
     }
     const currentUserSub = this.store

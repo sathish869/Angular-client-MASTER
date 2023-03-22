@@ -37,7 +37,7 @@ export const authReducer = createReducer(
   on(authActions.retrieveCurrentUser, (state, { currentUser }) => ({
     ...state,
     userData: currentUser,
-    userToken: null,
+    userToken: currentUser.token,
     loginError: null,
   }))
 );

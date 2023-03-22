@@ -23,8 +23,10 @@ export class AuthEffects {
       mergeMap((loginData) => {
         return this.tokenShareService.onValidateToken(loginData.userToken).pipe(
           map(
-            (userData: UserDetails) =>
-              authActions.retrieveCurrentUser({ currentUser: userData }),
+            (userData: UserDetails) =>{
+              userData.token=loginData.userToken;
+              return authActions.retrieveCurrentUser({ currentUser: userData })
+            }
           ),
           catchError((errorData: HttpErrorResponse) =>
             of(

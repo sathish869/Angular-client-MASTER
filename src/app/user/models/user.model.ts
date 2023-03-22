@@ -50,5 +50,7 @@ export interface UserDetails {
   followers: number;
   following: number;
   created_at: Date;
-  updated_at: Date;
+  updated_at: Date;  
+  token:string;
+
 }
