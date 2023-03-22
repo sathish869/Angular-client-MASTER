@@ -1,6 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+<<<<<<< HEAD
 import { Subject, Observable } from 'rxjs';
+=======
+import { Subject, catchError, Observable } from 'rxjs';
+import { errorHandler } from '../utils/http-error-handler.utils';
+>>>>>>> 3800e28f010a648eb81d94993486d85aad86e777
 import { UserDetails, UsersDetails } from '../models/user.model';
 
 @Injectable({ providedIn: 'root' })

@@ -14,7 +14,7 @@ import { userListAction } from '../../stores/user-list-store/userList.actions';
 })
 export class UserComponent implements OnInit, OnDestroy {
   usersLoading: boolean = false;
-  loadedUsers: UsersDetails[] = null;
+  loadedUsers: UsersDetails[] ;
   currentUser: UserDetails;
   userComponentSub = new Subscription();
 

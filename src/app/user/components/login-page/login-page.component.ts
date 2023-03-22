@@ -1,10 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+<<<<<<< HEAD
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { universalStoreOfState } from 'src/app/app/app-store/app-store.module';
 import { Subscription } from 'rxjs';
 import { authActions } from '../../stores/auth-store/auth.actions';
+=======
+import { tokenShareService } from '../../services/token-share.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoginDetailService } from '../../services/login-detail.service';
+import { UserDetails } from '../../models/user.model';
+>>>>>>> 3800e28f010a648eb81d94993486d85aad86e777
 
 @Component({
   selector: 'app-login-page',
