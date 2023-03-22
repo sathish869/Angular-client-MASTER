@@ -1,0 +1,84 @@
+.container1 {
+    display: flex;
+}
+
+.img-container1 {
+    display: flex;
+    flex-wrap: wrap;
+    width: 150px;
+    overflow: hidden;
+}
+
+.spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40vh;
+}
+
+.user-container {
+    width: 60%;
+}
+
+.card-of-users {
+    padding: 2%;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-bottom: 5%;
+    background-image: linear-gradient(95.2deg, rgb(116, 138, 133) 26.8%, rgb(61, 75, 105) 64%);
+}
+
+.card-title {
+    color: rgb(0, 0, 0);
+}
+
+img {
+    max-width: 150px;
+    border-radius: 15px;
+}
+
+.card {
+    display: flex;
+    flex: 1 1 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.a-box {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.img-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 150px;
+    overflow: hidden;
+}
+
+.text-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px 0 0 0;
+}
+
+.text-inner {
+    color: #aecee2;
+    font-size: medium;
+}
+
+.view-user-container {
+    display: flex;
+    width: 30%;
+    padding-left: 1px;
+}
+
+.view-user-container button {
+    justify-content: center;
+    align-self: normal;
+    margin-top: 15%;
+    position: fixed;
+    padding: 0px 10px
+}
