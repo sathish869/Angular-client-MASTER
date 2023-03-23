@@ -1,0 +1,39 @@
+<div class="container1">
+    <div class="view-user-container">
+        <div>
+            <button mat-raised-button color="primary" [matTooltip]="(currentUser?'view user':'please login')"
+                (click)="currentUser?onLoadUserDetail(currentUser.login):null">view user</button>
+        </div>
+    </div>
+    <div class="user-container">
+        <div class="spinner" *ngIf="usersLoading;else elseBlock">
+            <mat-spinner></mat-spinner>
+        </div>
+        <ng-template #elseBlock>
+            <mat-list>
+                <mat-card *ngFor="let user of loadedUsers" (click)="onLoadUserDetail(user.login)">
+                    <div class="card-of-users">
+                        <mat-card-header>
+                            <mat-card-title>
+                                <h2 class="card-title">{{user.login}}</h2>
+                            </mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <div class="a-box">
+                                <div class="img-container">
+                                    <img [src]="user.avatar_url">
+                                </div>
+                                <div class="text-container">
+                                    <div class="text-inner">
+                                        <p> Node Id :{{user.node_id}}</p>
+                                        <p>Type :{{user.type}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                    </div>
+                </mat-card>
+            </mat-list>
+        </ng-template>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+<div class="primary-container">
+    <div class="container1"></div>
+    <div class="container2">
+        <div class="spinner" *ngIf="userLoading;else elseBlock">
+            <mat-spinner></mat-spinner>
+        </div>
+        <ng-template #elseBlock>
+            <mat-card *ngIf="clickedUser">
+                <div class="user-container">
+                    <div class="img-container">
+                        <img [src]="clickedUser.avatar_url">
+                    </div>
+                    <button (click)="onReturnToUser()"><mat-icon class="mat-icon"
+                            matTooltip="Back to users">keyboard_return</mat-icon></button>
+                    <h3><mat-card-title>{{clickedUser.login}}</mat-card-title></h3>
+                    <mat-card-content>
+                        <form>
+                            <tr>
+                                <td>No.of.Followers </td>
+                                <td class="td-container">:{{clickedUser.followers ?clickedUser.followers:0}}</td>
+                            </tr>
+                            <tr>
+                                <td>No.of.Repos </td>
+                                <td class="td-container">:{{clickedUser.public_repos?clickedUser.public_repos:0}}</td>
+                            </tr>
+                            <tr>
+                                <td>Location </td>
+                                <td class="td-container">:{{clickedUser.location?clickedUser.location:""}}</td>
+                            </tr>
+                        </form>
+                    </mat-card-content>
+                </div>
+            </mat-card>
+            <span class="repoContainer" *ngIf="dataSource">
+                <table class="repoTable" [dataSource]="dataSource" mat-table matSort>
+                    <span matColumnDef="repoName">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header> Repo name</th>
+                        <td *matCellDef="let value" mat-cell> {{value.repoName}} </td>
+                    </span>
+
+                    <span matColumnDef="repoDescription">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header> Description</th>
+                        <td *matCellDef="let value" mat-cell> {{value.repoDescription}} </td>
+                    </span>
+
+                    <span matColumnDef="watchers_count">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header> Watcher count</th>
+                        <td *matCellDef="let value" mat-cell> {{value.watchers_count}} </td>
+                    </span>
+
+                    <span matColumnDef="stars_count">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header> Stars count</th>
+                        <td *matCellDef="let value" mat-cell> {{value.stars_count}} </td>
+                    </span>
+
+                    <span matColumnDef="created_date">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header> Created date</th>
+                        <td *matCellDef="let value" mat-cell> {{value.created_date | date: 'shortDate'}} </td>
+                    </span>
+
+                    <span matColumnDef="updated_date">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header> Updated date</th>
+                        <td *matCellDef="let value" mat-cell> {{value.updated_date | date: 'shortDate'}} </td>
+                    </span>
+
+                    <tr *matHeaderRowDef="columnName" mat-header-row></tr>
+                    <tr *matRowDef="let row; columns: columnName;" mat-row></tr>
+                </table>
+                <mat-paginator [pageSize]="2" [pageSizeOptions]="[3,4,5]" aria-label="Select page"
+                    [disabled]="filteredUserRepo.length<1" aria-label="Select page"
+                    showFirstLastButtons></mat-paginator>
+            </span>
+        </ng-template>
+    </div>
+    <div class="container3"></div>
+</div>
