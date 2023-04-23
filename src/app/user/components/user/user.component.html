@@ -1,8 +1,8 @@
-<div class="container1">
+<div class="container">
     <div class="view-user-container">
-        <div>
+        <div class="view-user-btn">
             <button mat-raised-button color="primary" [matTooltip]="(currentUser?'view user':'please login')"
-                (click)="currentUser?onLoadUserDetail(currentUser.login):null">view user</button>
+                (click)="currentUser?LoadUserDetail(currentUser.login):null">view user</button>
         </div>
     </div>
     <div class="user-container">
@@ -10,30 +10,33 @@
             <mat-spinner></mat-spinner>
         </div>
         <ng-template #elseBlock>
-            <mat-list>
-                <mat-card *ngFor="let user of loadedUsers" (click)="onLoadUserDetail(user.login)">
-                    <div class="card-of-users">
-                        <mat-card-header>
-                            <mat-card-title>
-                                <h2 class="card-title">{{user.login}}</h2>
-                            </mat-card-title>
-                        </mat-card-header>
-                        <mat-card-content>
-                            <div class="a-box">
-                                <div class="img-container">
-                                    <img [src]="user.avatar_url">
-                                </div>
-                                <div class="text-container">
-                                    <div class="text-inner">
-                                        <p> Node Id :{{user.node_id}}</p>
-                                        <p>Type :{{user.type}}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </mat-card-content>
+            <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
+                <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+                    {{node.name}}&nbsp;({{node.stargazers_count}})
+                </mat-tree-node>
+                <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+                    <div class="mat-tree-node">
+                        <div class="icons">
+                            <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
+                                <mat-icon class="mat-icon-rtl-mirror" *ngIf="!isLoading(node);else spinnerBlock">
+                                    {{node.expanded ? 'expand_more' : 'chevron_right'}}
+                                </mat-icon>
+                                <ng-template #spinnerBlock><mat-spinner class="node-spinner" diameter="20"
+                                        color="accent"></mat-spinner></ng-template>
+                            </button>
+                        </div>
+                        <mat-card class="user-card">
+                            <mat-card-header *ngIf="node.logo"><img class="user-avatar" mat-card-avatar
+                                    [src]="node.logo"></mat-card-header>
+                            <mat-card-content class="card-content" (click)="LoadUserDetail(node.name)">
+                                {{node.name}}</mat-card-content>
+                        </mat-card>
                     </div>
-                </mat-card>
-            </mat-list>
+                    <div class="child-node" [class.example-tree-invisible]="!node.expanded">
+                        <ng-container matTreeNodeOutlet></ng-container>
+                    </div>
+                </mat-nested-tree-node>
+            </mat-tree>
         </ng-template>
     </div>
 </div>

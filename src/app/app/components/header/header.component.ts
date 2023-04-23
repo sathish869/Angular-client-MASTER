@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { universalStoreOfState } from 'src/app/app/app-store/app-store.module';
 import { authActions } from 'src/app/user/stores/auth-store/auth.actions';
+import { treeActions } from 'src/app/user/stores/nested-tree-store/tree.actions';
 
 @Component({
   selector: 'app-header',
@@ -11,13 +12,12 @@ import { authActions } from 'src/app/user/stores/auth-store/auth.actions';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  HeaderComponentSub: Subscription = new Subscription();
+  headerComponentSub: Subscription = new Subscription();
   isInLoginPage: boolean;
   isLoggedIn: boolean;
   constructor(
     private store: Store<universalStoreOfState>,
-    private router: Router,
-    private route: ActivatedRoute
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -25,6 +25,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       if (events instanceof NavigationStart) {
         if (events.url === '/login') {
           this.isInLoginPage = true;
+          this.store.dispatch(treeActions.removeTreeData());
         } else {
           this.isInLoginPage = false;
         }
@@ -37,22 +38,22 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.isLoggedIn = true;
       }
     });
-    this.HeaderComponentSub.add(urlSub);
-    this.HeaderComponentSub.add(storeSub);
+    this.headerComponentSub.add(urlSub);
+    this.headerComponentSub.add(storeSub);
   }
   ngOnDestroy(): void {
-    this.HeaderComponentSub.unsubscribe();
+    this.headerComponentSub.unsubscribe();
   }
 
   onLogout(): void {
     this.store.dispatch(authActions.logout());
-    this.router.navigate(['/login'], { relativeTo: this.route });
+    this.router.navigate(['/login']);
   }
 
   onLogin(): void {
-    this.router.navigate(['/login'], { relativeTo: this.route });
+    this.router.navigate(['/login']);
   }
   onLoadUsers(): void {
-    this.router.navigate(['/users'], { relativeTo: this.route });
+    this.router.navigate(['/users']);
   }
 }

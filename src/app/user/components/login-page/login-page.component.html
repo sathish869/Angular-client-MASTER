@@ -4,8 +4,8 @@
             <mat-form-field appearance="fill">
                 <mat-label>Enter the token</mat-label>
                 <input type="password" #inputToken matInput>
-                <mat-icon *ngIf="inputToken.value" matSuffix>key</mat-icon>
-                <mat-icon #elseBlock *ngIf="!inputToken.value" matSuffix>key_off</mat-icon>
+                <mat-icon *ngIf="inputToken.value;else elseBlock" matSuffix>key</mat-icon>
+                <ng-template #elseBlock><mat-icon matSuffix>key_off</mat-icon></ng-template>
                 <mat-hint>GIT hub token</mat-hint>
             </mat-form-field>
         </div>

@@ -31,8 +31,8 @@
                     </mat-card-content>
                 </div>
             </mat-card>
-            <span class="repoContainer" *ngIf="dataSource">
-                <table class="repoTable" [dataSource]="dataSource" mat-table matSort>
+            <span class="repository-container" *ngIf="dataSource">
+                <table class="repository-table" [dataSource]="dataSource" mat-table matSort>
                     <span matColumnDef="repoName">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header> Repo name</th>
                         <td *matCellDef="let value" mat-cell> {{value.repoName}} </td>

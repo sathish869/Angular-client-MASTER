@@ -5,69 +5,69 @@
     margin-top: 40vh;
 }
 
+.container {
+    display: flex;
+}
+
 .user-container {
     width: 60%;
-}
-
-.card-of-users {
-    padding: 2%;
-    border-radius: 15px;
-    cursor: pointer;
-    margin-bottom: 5%;
-    background-image: linear-gradient(95.2deg, rgb(116, 138, 133) 26.8%, rgb(61, 75, 105) 64%);
-}
-
-.card-title {
-    color: rgb(0, 0, 0);
-}
-
-img {
-    max-width: 150px;
-    border-radius: 15px;
-}
-
-.card {
-    display: flex;
-    flex: 1 1 100%;
-    align-items: center;
-    justify-content: center;
-}
-
-.a-box {
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-.img-container {
-    display: flex;
-    flex-wrap: wrap;
-    width: 150px;
-    overflow: hidden;
-}
-
-.text-container {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 10px 0 0 0;
-}
-
-.text-inner {
-    color: #aecee2;
-    font-size: medium;
+    padding-top: 60px;
 }
 
 .view-user-container {
     display: flex;
     width: 30%;
     padding-left: 1px;
+    height: 300px;
+    position: relative;
+}
+
+.view-user-btn {
+    margin: 0;
+    position: absolute;
+    top: 100%;
 }
 
 .view-user-container button {
-    justify-content: center;
-    align-self: normal;
-    margin-top: 15%;
     position: fixed;
     padding: 0px 10px
+}
+
+.user-avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 65%;
+}
+
+.user-card {
+    width: 70%;
+    display: flex;
+    align-items: center;
+}
+
+.child-node {
+    padding-left: 50px;
+}
+
+.card-content {
+    cursor: pointer;
+    padding-left: 7px;
+}
+
+.mat-tree-node {
+    margin-top: 3px;
+}
+
+.child-node .mat-tree-node {
+    background-color: rgb(239, 239, 238);
+    border-radius: 0.5rem;
+    padding-left: 10px;
+}
+
+.node-spinner {
+    margin-left: 10px;
+}
+
+.icons {
+    overflow: hidden;
 }

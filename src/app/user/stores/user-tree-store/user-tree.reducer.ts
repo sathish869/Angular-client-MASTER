@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { UsersDetails } from '../../models/user.model';
-import { userListAction } from './userList.actions';
+import { userListAction } from './user-tree.actions';
 
 export interface userListState {
   usersData: UsersDetails[] | null;

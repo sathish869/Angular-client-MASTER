@@ -4,8 +4,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap, of } from 'rxjs';
 import { handleAnError } from '../../utils/http-error-handler.utils';
 import { UsersDetails } from '../../models/user.model';
-import { tokenShareService } from '../../services/token-share.service';
-import { userListAction } from './userList.actions';
+import { TokenShareService } from '../../services/token-share.service';
+import { userListAction } from './user-tree.actions';
 
 @Injectable()
 export class UserEffects {
@@ -31,6 +31,6 @@ export class UserEffects {
 
   constructor(
     private actions$: Actions,
-    private tokenShareService: tokenShareService
+    private tokenShareService: TokenShareService
   ) {}
 }

@@ -63,8 +63,12 @@ button:hover {
 
 .container2 {
     width: 70%;
+    margin-top: 10%;
 }
 
 .container3 {
     width: 15%;
+}
+.repository-table{
+    width: 100%;
 }

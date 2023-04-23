@@ -8,11 +8,11 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { storeOfAppModule } from '../app/app-store/app-store.module';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { environment } from 'src/environments/environment';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent,HeaderComponent],
 
   bootstrap: [AppComponent],
   imports: [
@@ -20,7 +20,6 @@ import { environment } from 'src/environments/environment';
     UserModule,
     AppRoutingModule,
     StoreDevtoolsModule.instrument({ logOnly: environment.production }),
-    // StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot(storeOfAppModule.allEffects),
     StoreModule.forRoot(storeOfAppModule.allReducers),
   ],

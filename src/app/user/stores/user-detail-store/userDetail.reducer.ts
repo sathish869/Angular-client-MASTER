@@ -32,7 +32,7 @@ export const UserDetailReducer = createReducer(
     loadingFlag: null,
     error: null,
   })),
-  on(userDetailActions.passUserName, (state, { userName }) => ({
+  on(userDetailActions.passUserName, (state) => ({
     clickedUser: null,
     loadingFlag: true,
     error: null,
