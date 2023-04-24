@@ -8,7 +8,8 @@ const loadingUserDetailFailed=createAction("[USER_DETAIL] load clicked user", pr
 const deleteClickedUser=createAction("[USER_DETAIL] delete clicked user");
 const retrieveClickedUser=createAction("[USER_DETAIL] retrieve clicked user", props<{ userData:[UserDetails,RepositoryDetail[]] }>());
 const passUserName=createAction("[USER_DETAIL] pass userName", props<{ userName:string }>());
-const loadUserNodeData=createAction("[USER DETAIL] load backup of userNode data",props<{ userTreeData:UserNode[] }>());
+const loadUserNodeData=createAction("[USER_DETAIL] load backup of tree data",props<{ userTreeData:UserNode[] }>());
+const removeTreeData=createAction("[USER_DETAIL] remove tree data");
 
 export const userDetailActions = {
   loadingUserDetailFailed,
@@ -16,4 +17,5 @@ export const userDetailActions = {
   retrieveClickedUser,
   passUserName,
   loadUserNodeData,
+  removeTreeData
 };

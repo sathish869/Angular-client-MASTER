@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { universalStoreOfState } from 'src/app/app/app-store/app-store.module';
 import { Subscription } from 'rxjs';
 import { authActions } from '../../stores/auth-store/auth.actions';
+import { userDetailActions } from '../../stores/user-detail-store/userDetail.actions';
 
 @Component({
   selector: 'app-login-page',
@@ -30,6 +31,7 @@ export class LoginPageComponent implements OnInit {
           this.router.navigate(['/users'], { relativeTo: this.route });
         }
       });
+    this.store.dispatch(userDetailActions.removeTreeData());
   }
   onLogin(token: string): void {
     this.matSnackBar.dismiss();

@@ -74,6 +74,8 @@ export class NestedTreeDataSource implements DataSource<UserNode> {
             .reverse()
             .slice(0, 10);
           this.append(node, childNodeData);
+        } else {
+          this.matSnackBar.open('No repo found for a user');
         }
       });
   }

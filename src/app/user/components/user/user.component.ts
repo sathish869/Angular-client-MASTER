@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserDetails, UsersDetails } from '../../models/user.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { universalStoreOfState } from 'src/app/app/app-store/app-store.module';
@@ -12,7 +12,7 @@ import { UserNode } from '../../models/node-details.models';
 import { TokenShareService } from '../../services/token-share.service';
 import { cloneDeep } from 'lodash';
 import { userDetailActions } from '../../stores/user-detail-store/userDetail.actions';
-import { treeActions } from '../../stores/nested-tree-store/tree.actions';
+import { treeDataSelector } from '../../stores/user-detail-store/userDetail.selector';
 
 @Component({
   selector: 'app-user',
@@ -47,18 +47,18 @@ export class UserComponent implements OnInit, OnDestroy {
     this.loadUsersData();
   }
   ngOnDestroy(): void {
-    this.userComponentSub.unsubscribe();
     this.store.dispatch(
-      treeActions.storeTreeData({userNodeData:this.dataSource.data })
+      userDetailActions.loadUserNodeData({ userTreeData: this.dataSource.data })
     );
- 
+    this.userComponentSub.unsubscribe();
   }
   loadUsersData(): void {
-    const treeDataSub = this.store
-      .select('treeState')
-      .subscribe((NestedTreeData) => {
-        if (NestedTreeData.treeData.length !== 0) {
-          this.dataSource.reloadTree(cloneDeep(NestedTreeData.treeData));
+    this.store
+      .select(treeDataSelector)
+      .pipe(take(1))
+      .subscribe((treeData) => {
+        if (treeData.length !== 0) {
+          this.dataSource.reloadTree(cloneDeep(treeData));
         } else {
           this.store.dispatch(userListAction.retrieveUsersData());
           const currentUserSub = this.store
@@ -84,7 +84,6 @@ export class UserComponent implements OnInit, OnDestroy {
           this.userComponentSub.add(usersSub);
         }
       });
-    this.userComponentSub.add(treeDataSub);
   }
   LoadUserDetail(userName: string) {
     console.log('onLoadUserDetail', userName);

@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { universalStoreOfState } from 'src/app/app/app-store/app-store.module';
 import { authActions } from 'src/app/user/stores/auth-store/auth.actions';
-import { treeActions } from 'src/app/user/stores/nested-tree-store/tree.actions';
 
 @Component({
   selector: 'app-header',
@@ -25,7 +24,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
       if (events instanceof NavigationStart) {
         if (events.url === '/login') {
           this.isInLoginPage = true;
-          this.store.dispatch(treeActions.removeTreeData());
         } else {
           this.isInLoginPage = false;
         }
