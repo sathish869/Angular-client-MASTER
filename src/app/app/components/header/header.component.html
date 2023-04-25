@@ -1,0 +1,15 @@
+<mat-toolbar class="header">
+    <span>GitHub Browser</span>
+    <span class="icons">
+        <span *ngIf="isInLoginPage" (click)="loadUsers()">
+            <mat-icon matTooltip="Load Users">visibility</mat-icon>
+        </span>
+        <ng-container *ngIf="!isInLoginPage">
+            <span *ngIf="isLoggedIn;else elseBlock"><mat-icon matTooltip="Logout"
+                    (click)="logout()">logout</mat-icon></span>
+            <ng-template #elseBlock>
+                <span><mat-icon matTooltip="Login" (click)="login()">login</mat-icon></span>
+            </ng-template>
+        </ng-container>
+    </span>
+</mat-toolbar>

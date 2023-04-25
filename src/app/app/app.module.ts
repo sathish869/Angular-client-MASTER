@@ -1,21 +1,21 @@
 import { NgModule } from "@angular/core";
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from "@angular/material/snack-bar";
-import { MaterialModule } from "../shared/modules/material.module";
 import { SharedModule } from "../shared/modules/shared.module";
 import { UserModule } from "../user/user.module";
 import { AppComponent } from "./components/app/app.component";
 import { AppRoutingModule } from "./routes/app-routing.module";
+import { HeaderComponent } from "./components/header/header.component";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent
   ],
   
   bootstrap: [AppComponent],
   imports: [
     SharedModule,
     UserModule,
-    MaterialModule,
     AppRoutingModule,
   ],
   providers: [

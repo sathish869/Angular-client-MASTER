@@ -2,14 +2,16 @@
     <mat-spinner></mat-spinner>
 </div>
 <ng-template #elseBlock>
-    <mat-selection-list #userSelector [multiple]="false">
-        <mat-list-option *ngFor="let user of loadedUsers" [value]="user.login">
-            <p>{{user.login}}</p>
-        </mat-list-option>
-    </mat-selection-list>
-
-    <p>
-        Option selected: {{userSelector.selectedOptions.hasValue() ? userSelector.selectedOptions.selected[0].value :
-        'None'}}
-    </p>
+    <div >
+        <mat-selection-list #userSelector [multiple]="false">
+            <mat-list-option class="user-list" *ngFor="let user of loadedUsers" [value]="user.login">
+                <p>{{user.login}}</p>
+            </mat-list-option>
+        </mat-selection-list>
+    
+        <p>
+            Option selected: {{userSelector.selectedOptions.hasValue() ? userSelector.selectedOptions.selected[0].value :
+            'None'}}
+        </p>
+    </div>
 </ng-template>

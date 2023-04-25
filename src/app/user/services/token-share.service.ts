@@ -5,12 +5,11 @@ import { errorHandler } from '../utils/http-error-handler.utils';
 import { UserDetails, UsersDetails } from '../models/user.model';
 
 @Injectable({ providedIn: 'root' })
-export class tokenShareService {
+export class TokenShareService {
+  tokenEmitter = new Subject<string>();
   constructor(private http: HttpClient) {}
-  public tokenEmitter = new Subject<string>();
-  public currentUser = new Subject<string>();
 
-  onValidateToken(token: string): Observable<UserDetails> {
+  validateToken(token: string): Observable<UserDetails> {
     return this.http
       .get<UserDetails>('https://api.github.com/user', {
         headers: { Authorization: 'Bearer ' + token },
@@ -18,11 +17,11 @@ export class tokenShareService {
       .pipe(catchError(errorHandler));
   }
 
-  onEmitToken(token: string): void {
+  emitToken(token: string): void {
     this.tokenEmitter.next(token);
   }
 
-  onLoadUsers(): Observable<UsersDetails[]> {
+  loadUsers(): Observable<UsersDetails[]> {
     return this.http
       .get<UsersDetails[]>('https://api.github.com/users')
       .pipe(catchError(errorHandler));

@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UsersDetails } from '../../models/user.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { tokenShareService } from '../../services/token-share.service';
+import { TokenShareService } from '../../services/token-share.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,24 +9,30 @@ import { Router } from '@angular/router';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css'],
 })
-export class UserComponent {
+export class UserComponent implements OnInit,OnDestroy {
   usersLoading: boolean = false;
   loadedUsers: UsersDetails[] = [];
 
-  constructor(private router:Router,
+  constructor(
+    private router: Router,
     private matSnackBar: MatSnackBar,
-    private tokenShareService: tokenShareService
-  ) {
-    this.onLoadUsers();
+    private tokenShareService: TokenShareService
+  ) {}
+
+  ngOnInit(): void {
+    this.loadUsers();
+  }
+  ngOnDestroy(): void {
+    this.tokenShareService.tokenEmitter.next('');
   }
 
-  onLoadUsers(): void {
+  loadUsers(): void {
     this.usersLoading = true;
-    this.tokenShareService.onLoadUsers().subscribe({
+    this.tokenShareService.loadUsers().subscribe({
       next: (responseData: UsersDetails[]) => {
         this.loadedUsers = responseData.length ? responseData : [];
         console.log(responseData);
-          this.usersLoading = false;
+        this.usersLoading = false;
       },
       error: (error: string) => {
         this.matSnackBar.open(error);

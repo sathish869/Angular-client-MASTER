@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { tokenShareService } from '../../services/token-share.service';
+import { Router } from '@angular/router';
+import { TokenShareService } from '../../services/token-share.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginDetailService } from '../../services/login-detail.service';
 import { UserDetails } from '../../models/user.model';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-login-page',
@@ -13,8 +14,7 @@ import { UserDetails } from '../../models/user.model';
 export class LoginPageComponent implements OnInit {
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
-    private tokenShareService: tokenShareService,
+    private tokenShareService: TokenShareService,
     private matSnackBar: MatSnackBar,
     private loginDetailService: LoginDetailService
   ) {}
@@ -22,20 +22,22 @@ export class LoginPageComponent implements OnInit {
     this.loginDetailService.isLoggedIn.next(false);
   }
   onLogin(token: string): void {
-    this.tokenShareService.onValidateToken(token).subscribe({
+    this.tokenShareService.validateToken(token).pipe(
+      take(1)
+    ).subscribe({
       next:(userData: UserDetails) => {
         this.loginDetailService.isLoggedIn.next(true);
         console.log(userData);
         this.loginDetailService.currentUser.next(userData);
-        this.tokenShareService.onEmitToken(token);
-        this.router.navigate(['/users'], { relativeTo: this.route });
+        this.tokenShareService.emitToken(token);
+        this.router.navigate(['/users']);
       },
       error: (error:string) => {
         this.matSnackBar.open(error);
       }});
   }
   onGetIn(): void {
-    this.tokenShareService.onEmitToken('');
-    this.router.navigate(['/users'], { relativeTo: this.route });
+    this.tokenShareService.emitToken('');
+    this.router.navigate(['/users']);
   }
 }

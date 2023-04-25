@@ -1,9 +1,9 @@
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { NgModule } from "@angular/core";
-import { MaterialModule } from "../shared/modules/material.module";
 import { LoginPageComponent } from "./components/login-page/login-page.component";
 import { UserComponent } from "./components/user/user.component";
 import { AuthInterceptorService } from "./interceptors/auth-interceptor.service";
+import { SharedModule } from "../shared/modules/shared.module";
 
 @NgModule({
     declarations: [
@@ -11,7 +11,7 @@ import { AuthInterceptorService } from "./interceptors/auth-interceptor.service"
        UserComponent,
     ],
     imports: [
-           MaterialModule,    
+           SharedModule,    
     ],
     providers: [
       {

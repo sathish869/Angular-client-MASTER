@@ -4,6 +4,6 @@ import { UserDetails } from "../models/user.model";
 
 @Injectable({ providedIn: 'root' })
 export class LoginDetailService{
-    public isLoggedIn = new Subject<boolean>();
-    public currentUser=new BehaviorSubject<UserDetails | null>(null);
+     isLoggedIn = new Subject<boolean>();
+     currentUser=new BehaviorSubject<UserDetails | null>(null);
 }
